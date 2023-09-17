@@ -1,9 +1,21 @@
+
 # Установка безопасных cookies
 #Header set Set-Cookie HttpOnly;Secure
 Header always edit Set-Cookie (.*) "$1; HTTPOnly; Secure"
 
 # Включаем механизм перезаписи URL
 RewriteEngine on
+
+# Убрать .php и добавить слэш в конце
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^\.]+)/$ $1.php 
+
+# Если запросить без слэша, то добавить его и перенаправить
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
+RewriteRule (.*)$ /$1/ [R=301,L]
 
 # Удаляем "www" из URL и перенаправляем на версию без "www"
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
@@ -76,6 +88,11 @@ Header set Cache-Control "max-age=31536050"
 
 # Включаем сжатие для определенных типов файлов
 <IfModule mod_deflate.c>
+  <FilesMatch "\.(ttf|otf|eot|svg)$" >
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+</IfModule>
+
   <FilesMatch "\.(ttf|otf|eot|svg)$" >
     SetOutputFilter DEFLATE
   </FilesMatch>
