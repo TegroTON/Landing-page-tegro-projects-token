@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+Sitemap: https://tegro.ru/sitemap.xml
+Host: tegro.ru
