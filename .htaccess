@@ -1,131 +1,82 @@
+# Установка безопасных cookies
+#Header set Set-Cookie HttpOnly;Secure
+Header always edit Set-Cookie (.*) "$1; HTTPOnly; Secure"
 
-# 1. SECURITY SETTINGS
+# Включаем механизм перезаписи URL
+RewriteEngine on
 
-# Prevent directory listings
-Options -Indexes
-
-# Protect the htaccess file
-<Files .htaccess>
-Order Allow,Deny
-Deny from all
-</Files>
-
-# Protect hidden files from being viewed
-<Files .*>
-Order Allow,Deny
-Deny from all
-</Files>
-
-# 2. OPTIMIZATION SETTINGS
-
-# Enable Gzip compression
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/plain
-  AddOutputFilterByType DEFLATE text/html
-  AddOutputFilterByType DEFLATE text/xml
-  AddOutputFilterByType DEFLATE text/css
-  AddOutputFilterByType DEFLATE application/xml
-  AddOutputFilterByType DEFLATE application/xhtml+xml
-  AddOutputFilterByType DEFLATE application/rss+xml
-  AddOutputFilterByType DEFLATE application/javascript
-  AddOutputFilterByType DEFLATE application/x-javascript
-</IfModule>
-
-# Set expiration headers for static assets
-<IfModule mod_expires.c>
-  ExpiresActive On
-  ExpiresByType image/jpg "access 1 year"
-  ExpiresByType image/jpeg "access 1 year"
-  ExpiresByType image/gif "access 1 year"
-  ExpiresByType image/png "access 1 year"
-  ExpiresByType text/css "access 1 month"
-  ExpiresByType text/html "access 1 month"
-  ExpiresByType application/pdf "access 1 month"
-  ExpiresByType text/x-javascript "access 1 month"
-  ExpiresByType application/x-shockwave-flash "access 1 month"
-  ExpiresByType image/x-icon "access 1 year"
-  ExpiresDefault "access 1 month"
-</IfModule>
-
-# 3. REMOVE .php EXTENSION
-
-# Turn on the rewrite engine
-RewriteEngine On
-
-# To externally redirect /dir/foo.php to /dir/foo
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
-RewriteRule ^ %1 [R,L,NC]
-
-# To internally forward /dir/foo to /dir/foo.php
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^ %{REQUEST_URI}.php [L]
-
-
-# Additional Security Settings
-
-# Protect from brute force attack
-<IfModule mod_evasive20.c>
-DOSHashTableSize 3097
-DOSPageCount 2
-DOSSiteCount 50
-DOSPageInterval 1
-DOSSiteInterval 1
-DOSBlockingPeriod 10
-</IfModule>
-
-# Deny access to specific IPs (example IPs shown, you can replace them)
-<Limit GET POST>
-order allow,deny
-deny from 123.456.789.0
-deny from 987.654.321.0
-allow from all
-</Limit>
-
-# Protect specific directories with password (replace with your paths and credentials)
-#AuthType Basic
-#AuthName "Restricted Access"
-#AuthUserFile /path/to/.htpasswd
-#Require valid-user
-#<Files admin.php>
-#AuthName "Admin Area"
-#AuthType Basic
-#AuthUserFile /path/to/.htpasswd
-#Require valid-user
-#</Files>
-
-# Disable certain HTTP methods
-<LimitExcept GET POST HEAD>
-deny from all
-</LimitExcept>
-
-# Redirections and SEO
-
-# Redirect www to non-www
+# Удаляем "www" из URL и перенаправляем на версию без "www"
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-# Redirect HTTP to HTTPS
-#RewriteCond %{HTTPS} off
-#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Условие исключает файлы с определенными расширениями из последующих правил
+RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.jpg|\.jpeg|\.gif|\.svg|\.map)$ [NC]
 
-# Performance
+# Удаляем множественные слэши в конце URL
+RewriteCond %{THE_REQUEST} \s[^?]*//
+RewriteRule ^.*$ /$0 [R=301,L,NE]
 
-# Brotli compression (if supported by server)
-<IfModule mod_brotli.c>
-AddOutputFilterByType BROTLI_COMPRESS text/plain text/html text/xml text/css text/js application/javascript
+# Добавляем слэш в конце URL, если его нет
+RewriteCond %{REQUEST_URI} !(/$|\.)
+RewriteRule (.*) %{REQUEST_URI}/ [R=301,L]
+
+# Удаляем "index.php" из URL
+RewriteCond %{THE_REQUEST} ^.*/index\.php
+RewriteRule ^(.*)index.php$ /$1 [R=301,L]
+
+# Передаем заголовок авторизации для скриптов
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+# Перенаправления для различных директорий на соответствующие index.php файлы
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^my/(.*)$ /my/index.php?path=$1 [NC,L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^lk/(.*)$ /lk/index.php?path=$1 [NC,L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^pay/(.*)$ /pay/index.php?path=$1 [NC,L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^taifun/(.*)$ /taifun/index.php?path=$1 [NC,L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^notify/(.*)$ /notify/index.php?path=$1 [NC,L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^api/(.*)$ /api/index.php?path=$1 [NC,L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^rates/(.*)$ /rates/index.php?path=$1 [NC,L,QSA]
+
+# Перенаправление основного сайта на index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.jpg|\.jpeg|\.gif|\.svg|\.map)$ [NC]
+RewriteRule ^(.*)$ /index.php?path=$1 [NC,L,QSA]
+
+# Устанавливаем заголовки кеша для определенных типов файлов
+<FilesMatch "\.(ico|pdf|jpg|jpeg|png|webp|gif|html|htm|xml|txt|xsl|css|woff2)$">
+Header set Cache-Control "max-age=31536050"
+</FilesMatch>
+
+# Включаем модуль Expires для установки времени истечения срока действия для различных типов ресурсов
+<IfModule mod_expires.c>
+  Header set cache-control: public
+  ExpiresActive on
+  ExpiresByType font/ttf      "access plus 1 month"
+  ExpiresByType font/woff     "access plus 1 month"
+  ExpiresByType font/woff2  "access plus 1 month"
+  ExpiresByType application/font-woff2  "access plus 1 month"
+  ExpiresByType application/x-font-woff2  "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
 </IfModule>
 
-# Custom Error Pages
-ErrorDocument 404 /404.html
-ErrorDocument 500 /500.html
-
-# Miscellaneous
-
-# Default charset
-AddDefaultCharset UTF-8
-
-# Default language
-DefaultLanguage en-US
-
-# Disable eTags
-FileETag None
+# Включаем сжатие для определенных типов файлов
+<IfModule mod_deflate.c>
+  <FilesMatch "\.(ttf|otf|eot|svg)$" >
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+</IfModule>
