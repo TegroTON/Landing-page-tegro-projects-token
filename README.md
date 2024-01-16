@@ -1,77 +1,79 @@
-## README: Tegro Landing Page Configuration
+# README: Tegro Landing Page Configuration
 
-### Введение
+## Introduction
 
-Этот README предназначен для команды Tegro и содержит подробное описание настроек `.htaccess` файла, используемого на посадочной странице проекта.
+This comprehensive README is designed for the Tegro team. It contains a detailed guide on configuring the `.htaccess` file for the project's landing page, enhancing security, and optimizing user experience.
 
-### .htaccess Конфигурация
+## .htaccess Configuration
 
-#### Безопасность Cookies
+### Enhancing Cookie Security
 
 ```apache
-# Установка безопасных cookies
-#Header set Set-Cookie HttpOnly;Secure
+# Implement secure cookies
+# Header set Set-Cookie HttpOnly;Secure
 Header always edit Set-Cookie (.*) "$1; HTTPOnly; Secure"
 ```
-Здесь мы устанавливаем флаги `HttpOnly` и `Secure` для всех cookies, что повышает безопасность, предотвращая доступ к ним через JavaScript и гарантируя, что cookies передаются только по зашифрованным соединениям.
+This configuration enforces the `HttpOnly` and `Secure` flags for all cookies, increasing security by restricting JavaScript access and ensuring transmission over encrypted connections.
 
-#### Защита скрытых файлов
+#### Protecting Hidden Files
 
 ```apache
-# Защита .htaccess и других скрытых файлов
+# Secure .htaccess and other hidden files
 <Files ~ "^\.">
     Order allow,deny
     Deny from all
 </Files>
 ```
-Этот блок предотвращает доступ к скрытым файлам, таким как `.htaccess`, обеспечивая дополнительный уровень безопасности.
+This block safeguards hidden files, like `.htaccess`, adding an extra layer of security against unauthorized access.
 
-#### Механизм перезаписи URL
+#### URL Rewrite Mechanism
 
 ```apache
-# Включаем механизм перезаписи URL
+# Activate URL rewriting
 RewriteEngine on
 ```
-Включение модуля `mod_rewrite` позволяет нам выполнять различные перенаправления и изменения URL.
+Enabling the`mod_rewrite` module facilitates URL redirections and modifications for improved navigation and SEO.
 
-#### Удаление расширения `.php` из URL
+#### Streamlining URL Structure
 
 ```apache
-# Перенаправляем URL с .php на версию без .php
+# Redirect .php URLs to cleaner versions
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
 RewriteRule ^ %1/ [R=301,L]
 
-# Убрать .php и добавить слэш в конце
+# Remove .php extension, add trailing slash
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^([^\.]+)/$ $1.php 
+RewriteRule ^([^\.]+)/$ $1.php
 ```
-Эти правила удаляют расширение `.php` из URL и добавляют слэш в конце, создавая более чистый и дружелюбный URL.
 
-#### Удаление `www` из URL
+These rules are aimed at removing the `.php` extension from URLs and appending a trailing slash, thereby simplifying the URLs for better user experience.
+
+#### Optimizing URLs for Brand Consistency
 
 ```apache
-# Удаляем "www" из URL и перенаправляем на версию без "www"
+# Exclude "www" from URLs, redirect to non-www version
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 ```
-Это правило удаляет `www` из URL для единообразия и SEO.
 
-#### Перенаправление 404 ошибок
+Removing `www` from URLs ensures brand consistency and enhances SEO performance.
+
+Intelligent 404 Error Handling
 
 ```apache
-# Если файл или директория, которые запрашиваются, не существуют
+# Smart redirection for non-existent pages
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-# Перенаправляем на главную страницу, имитируя ошибку 404
 RewriteRule . / [L,R=301]
 ```
-Если пользователь пытается получить доступ к несуществующей странице, его перенаправляют на главную страницу.
 
-#### Дополнительные конфигурации
+This setup redirects users to the homepage when they attempt to access pages that don't exist, offering a seamless user experience while maintaining site engagement.
 
-В файле также присутствуют другие конфигурации, такие как установка заголовков кеша, активация сжатия для определенных типов файлов и другие.
+#### Comprehensive Additional Configurations
 
-### Заключение
+Besides the main configurations, the .htaccess file includes additional settings such as cache headers, file compression activation for specific file types, and other performance-enhancing features.
 
-`.htaccess` файл является мощным инструментом для управления поведением сервера и настройки посадочной страницы. Пожалуйста, обращайтесь к этому README при необходимости внесения изменений или для понимания текущих настроек.
+### Conclusion
+
+The `.htaccess` file is an essential component for configuring the server behavior and setting up the landing page. This README serves as an in-depth guide for the Tegro team, assisting in understanding, implementing, and modifying configurations for optimal site performance and security.
