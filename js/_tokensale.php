@@ -88,7 +88,7 @@
                </div>
                <div class="presales__footer d-flex justify-content-between align-items-center">
                   <span class="fw-medium text-uppercase d-none d-sm-block">1000 TGR = 110 TON</span>
-                  <a href="https://tgrtoken.com" class="btn btn-primary mx-auto mx-sm-0">Pre-sale TGR (TON)</a>
+                  <a href="https://tegro.finance/" class="btn btn-primary mx-auto mx-sm-0">Pre-sale TGR (TON)</a>
                </div>
             </div>
          </div>

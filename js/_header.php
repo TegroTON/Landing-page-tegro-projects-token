@@ -299,7 +299,7 @@
                               </a>
                            </li>
                            <li>
-                              <a class="dropdown-item d-flex" href="https://tegro.ru/">
+                              <a class="dropdown-item d-flex" href="https://tegro.money/">
                               <img class="me-3" src="/assets/images/russian.svg" alt="">
                               Russian
                               </a>

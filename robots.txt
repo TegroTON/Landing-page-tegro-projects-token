@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
-Sitemap: https://tegro.ru/sitemap.xml
-Host: tegro.ru
+Sitemap: https://tegro.money/sitemap.xml
+Host: tegro.money
