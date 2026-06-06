@@ -12,7 +12,7 @@
                </h1>
                <p class="hero-description mb-5">Tonhold is the easiest way to store, send, and receive Toncoin on The Open Network, which is a powerful new blockchain that offers unprecedented transaction speeds.</p>
                <div class="hero-buttons text-center text-lg-start">
-                  <a href="https://wallet.tegro.io" class="btn btn-primary me-0 me-sm-3">
+                  <a href="https://tegro.finance/wallet/" class="btn btn-primary me-0 me-sm-3">
                   <i class="fa-solid fa-wallet me-3"></i>
                   Web Wallet
                   </a>

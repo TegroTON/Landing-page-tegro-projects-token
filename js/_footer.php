@@ -7,7 +7,7 @@
                <img src="/assets/images/footer-logo.png" width="56" alt="Company Tegro LLC" class="footer__logo">
                <div class="ps-4">
                   <p class="small mb-0">
-                     The first payment token DEX TegroFinance on the TON blockchain with the ability to exchange through bridges to other networks. Direct integration with the payment system TegroMoney<p>Listing/Contact: token@tegro.io</p>
+                     The first payment token DEX TegroFinance on the TON blockchain with the ability to exchange through bridges to other networks. Direct integration with the payment system TegroMoney<p>Listing/Contact: token@tegro.money</p>
                   </p>
                   <div class="footer-soclinks d-flex mt-4">
                      <a href="https://www.instagram.com/tontgr/" class="soclinks__item" target="_blank"><i class="fa-brands fa-instagram"></i></a>

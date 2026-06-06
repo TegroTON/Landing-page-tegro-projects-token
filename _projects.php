@@ -27,7 +27,7 @@
                         <p class="text-muted fs-16 mb-0">
                            Tonhold is the easiest way to store, send, and receive Toncoin on The Open Network, which is a powerful new blockchain that offers unprecedented transaction speeds. It supports tokens in the TON network, is integrated with DEX and NFT, and also works with TON DNS and TON proxy.
                         </p>
-                        <a href="https://ru.tegro.io/wallet/" class="btn btn-primary mt-4" target="_blank">Tegro Wallet<i class="fa-regular fa-arrow-up-right-from-square ms-3"></i></a>
+                        <a href="https://tegro.finance/wallet/" class="btn btn-primary mt-4" target="_blank">Tegro Wallet<i class="fa-regular fa-arrow-up-right-from-square ms-3"></i></a>
                      </div>
                      <div class="tab-pane fade" id="v-pills-4" role="tabpanel" aria-labelledby="v-pills-4-tab">
                         <p class="text-muted fs-16 mb-0">Cheaper and faster than any DEX? Discover Tegro Finance, the leading DEX on The Open Network (TON) with the best farms in DeFi and a lottery for TGR. Tegro is the first DEX platform on the market with a Multi-type Referral Program and the lowest platform transaction fees (0.4%). We are a decentralized exchange platform for swapping TON tokens on The Open Network.

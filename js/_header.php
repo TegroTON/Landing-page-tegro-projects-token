@@ -19,15 +19,15 @@
       <meta property="og:type" content="website">
       <meta property="og:title" content="Cross-platform payment token $TGR of the Tegro ecosystem">
       <meta property="og:description" content="The first payment token on the TON blockchain, with the ability to exchange through a bridge to another network.">
-      <meta property="og:url" content="https://tegro.io/">
-      <meta property="og:image" content="https://tegro.io/assets/imgages/tgr.png">
+      <meta property="og:url" content="https://tegro.finance/">
+      <meta property="og:image" content="https://tegro.finance/assets/imgages/tgr.png">
       <meta property="og:site_name" content="Cross-platform payment token Tegro $TGR">
       <meta property="twitter:card" content="summary_large_image">
       <meta property="twitter:site" content="@tgrtoken">
       <meta property="twitter:creator" content="@tgrtoken">
-      <meta property="twitter:image:src" content="https://tegro.io/assets/imgages/tgr.png">
+      <meta property="twitter:image:src" content="https://tegro.finance/assets/imgages/tgr.png">
       <link rel="manifest" href="/manifest.json"/>
-      <link rel="canonical" href="https://tegro.io/">
+      <link rel="canonical" href="https://tegro.finance/">
       <link rel="icon" href="/assets/images/favicon.svg">
       <link rel="stylesheet" href="/assets/libs/bootstrap/css/bootstrap.min.css">
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
@@ -101,7 +101,7 @@
                         </a>
                         <ul class="dropdown-menu">
                            <li>
-                              <a class="dropdown-item d-flex" href="https://wallet.tegro.io/" title="Web Wallet">
+                              <a class="dropdown-item d-flex" href="https://tegro.finance/wallet/" title="Web Wallet">
                                  <i class="fa-light fa-wallet dropdown-item-icon"></i>
                                  <div class="ms-3">
                                     Web Wallet

@@ -66,7 +66,7 @@
                   Friends are <span class="d-inline d-lg-block text-primary">never too many!</span>
                </h2>
                <p class="section__desc">Join us on social networks and always <br> be up to date with the latest events.</p>
-               <a href="https://tegro.click/tgr " class="btn btn-primary mt-40" target="_blank">All Social Media</a>
+               <a href="https://tegro.money/tgr " class="btn btn-primary mt-40" target="_blank">All Social Media</a>
             </div>
          </div>
       </div>
