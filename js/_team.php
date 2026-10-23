@@ -25,7 +25,7 @@
                </div>
                <div class="team-card__position">CEO & Lead</div>
                <div class="team-card__username">
-                  Sviatoslav <!--span class="d-block">Gusev</span-->
+                  Sam
                </div>
                <div class="team-card__letter-bg">S</div>
                <!--p class="team-card__desc mb-0 mt-20 small">
